@@ -24,7 +24,7 @@ export default function Navbar(props) {
                 </div>
             </div>
         </nav>
-    )
+    );
 }
 
 Navbar.propTypes = {
