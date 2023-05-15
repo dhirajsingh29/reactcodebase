@@ -21,17 +21,23 @@ export default function TextForm(props) {
     const handleBase64EncodeClick = () => {
         let newText = btoa(text);
         setText(newText);
-    }
+    };
 
     const handleBase64DecodeClick = () => {
         let newText = atob(text);
         setText(newText);
-    }
+    };
 
     const handleExtraSpace = () => {
         let newText = text.split(/[ ]+/);
         setText(newText.join(' '));
-    }
+    };
+
+    const handleCopy = () => {
+        let myBox = document.getElementById('myBox');
+        myBox.select();
+        navigator.clipboard.writeText(myBox.value);
+    };
 
     // without handleOnChange typing in textarea will be restricted
     const handleOnChange = (event) => {
@@ -88,6 +94,11 @@ export default function TextForm(props) {
                     className="btn btn-primary mx-1"
                     onClick={handleExtraSpace}>
                     Remove Extra Space
+                </button>
+                <button
+                    className="btn btn-primary mx-1"
+                    onClick={handleCopy}>
+                    Copy
                 </button>
             </div>
             <div className="container my-3" style={{color: props.mode === 'light' ? 'black' : 'white'}}>
