@@ -28,6 +28,11 @@ export default function TextForm(props) {
         setText(newText);
     }
 
+    const handleExtraSpace = () => {
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(' '));
+    }
+
     // without handleOnChange typing in textarea will be restricted
     const handleOnChange = (event) => {
         // console.log("On Change");
@@ -74,6 +79,11 @@ export default function TextForm(props) {
                     className="btn btn-primary mx-1"
                     onClick={handleBase64DecodeClick}>
                     Base64 Decode
+                </button>
+                <button
+                    className="btn btn-primary mx-1"
+                    onClick={handleExtraSpace}>
+                    Remove Extra Space
                 </button>
             </div>
             <div className="container my-3">
