@@ -14,6 +14,20 @@ export default function TextForm(props) {
         setText(newText);
     };
 
+    const handleClearClick = () => {
+        setText('');
+    };
+
+    const handleBase64EncodeClick = () => {
+        let newText = btoa(text);
+        setText(newText);
+    }
+
+    const handleBase64DecodeClick = () => {
+        let newText = atob(text);
+        setText(newText);
+    }
+
     // without handleOnChange typing in textarea will be restricted
     const handleOnChange = (event) => {
         // console.log("On Change");
@@ -45,6 +59,21 @@ export default function TextForm(props) {
                     className="btn btn-primary mx-1"
                     onClick={handleLowercaseClick}>
                     Convert to Lowercase
+                </button>
+                <button
+                    className="btn btn-primary mx-1"
+                    onClick={handleClearClick}>
+                    Clear
+                </button>
+                <button
+                    className="btn btn-primary mx-1"
+                    onClick={handleBase64EncodeClick}>
+                    Base64 Encode
+                </button>
+                <button
+                    className="btn btn-primary mx-1"
+                    onClick={handleBase64DecodeClick}>
+                    Base64 Decode
                 </button>
             </div>
             <div className="container my-3">
