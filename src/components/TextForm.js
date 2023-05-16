@@ -3,8 +3,6 @@ import { useState } from "react";
 export default function TextForm(props) {
 
     const handleUppercaseClick = () => {
-        // console.log("Uppercase was clicked");
-
         let newText = text.toUpperCase();
         setText(newText);
     };
@@ -37,6 +35,9 @@ export default function TextForm(props) {
         let myBox = document.getElementById('myBox');
         myBox.select();
         navigator.clipboard.writeText(myBox.value);
+
+        // to remove selection on copying
+        document.getSelection().removeAllRanges();
     };
 
     // without handleOnChange typing in textarea will be restricted
@@ -66,47 +67,54 @@ export default function TextForm(props) {
                     </textarea>
                 </div>
                 <button
-                    className="btn btn-primary mx-1"
+                    className="btn btn-primary mx-1 my-1"
+                    disabled={text.length === 0}
                     onClick={handleUppercaseClick}>
                     Convert to Uppercase
                 </button>
                 <button
-                    className="btn btn-primary mx-1"
+                    className="btn btn-primary mx-1 my-1"
+                    disabled={text.length === 0}
                     onClick={handleLowercaseClick}>
                     Convert to Lowercase
                 </button>
                 <button
-                    className="btn btn-primary mx-1"
+                    className="btn btn-primary mx-1 my-1"
+                    disabled={text.length === 0}
                     onClick={handleClearClick}>
                     Clear
                 </button>
                 <button
-                    className="btn btn-primary mx-1"
+                    className="btn btn-primary mx-1 my-1"
+                    disabled={text.length === 0}
                     onClick={handleBase64EncodeClick}>
                     Base64 Encode
                 </button>
                 <button
-                    className="btn btn-primary mx-1"
+                    className="btn btn-primary mx-1 my-1"
+                    disabled={text.length === 0}
                     onClick={handleBase64DecodeClick}>
                     Base64 Decode
                 </button>
                 <button
-                    className="btn btn-primary mx-1"
+                    className="btn btn-primary mx-1 my-1"
+                    disabled={text.length === 0}
                     onClick={handleExtraSpace}>
                     Remove Extra Space
                 </button>
                 <button
-                    className="btn btn-primary mx-1"
+                    className="btn btn-primary mx-1 my-1"
+                    disabled={text.length === 0}
                     onClick={handleCopy}>
                     Copy
                 </button>
             </div>
             <div className="container my-3" style={{color: props.mode === 'light' ? 'black' : 'white'}}>
                 <h3>Your text summary</h3>
-                <p>{text.length === 0 ? 0 : text.split(' ').length} words and {text.length} characters</p>
-                <p>{0.008 * (text.length === 0 ? 0 : text.split(' ').length)} Minutes read</p>
+                <p>{text.split(/[ ]+/).filter((ele) => {return ele.length !== 0}).length} words and {text.length} characters</p>
+                <p>{0.008 * (text.length === 0 ? 0 : text.split(' ').filter((ele) => {return ele.length !== 0}).length)} Minutes read</p>
                 <h5>Preview</h5>
-                <p>{text.length > 0 ? text : 'Enter text in the textbox above to preview'}</p>
+                <p>{text.length > 0 ? text : 'Nothing to preview'}</p>
             </div>
         </>
     );
