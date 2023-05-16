@@ -32,17 +32,11 @@ export default function TextForm(props) {
     };
 
     const handleCopy = () => {
-        let myBox = document.getElementById('myBox');
-        myBox.select();
-        navigator.clipboard.writeText(myBox.value);
-
-        // to remove selection on copying
-        document.getSelection().removeAllRanges();
+        navigator.clipboard.writeText(text);
     };
 
     // without handleOnChange typing in textarea will be restricted
     const handleOnChange = (event) => {
-        // console.log("On Change");
         setText(event.target.value);
     };
 
@@ -111,7 +105,7 @@ export default function TextForm(props) {
             </div>
             <div className="container my-3" style={{color: props.mode === 'light' ? 'black' : 'white'}}>
                 <h3>Your text summary</h3>
-                <p>{text.split(/[ ]+/).filter((ele) => {return ele.length !== 0}).length} words and {text.length} characters</p>
+                <p>{text.split(/\s+/).filter((ele) => {return ele.length !== 0}).length} words and {text.length} characters</p>
                 <p>{0.008 * (text.length === 0 ? 0 : text.split(' ').filter((ele) => {return ele.length !== 0}).length)} Minutes read</p>
                 <h5>Preview</h5>
                 <p>{text.length > 0 ? text : 'Nothing to preview'}</p>
